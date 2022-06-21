@@ -41,7 +41,7 @@ ResultSet rs = st.executeQuery(sql);
 				<%while(rs.next()) {%>
 				<div>
 					<div class="num"><%=rs.getInt("ID") %></div>
-					<div class="title"><a href="detail.html"><%=rs.getString("TITLE") %></a></div>
+					<div class="title"><a href="detail.jsp?id=<%=rs.getInt("ID") %>"><%=rs.getString("TITLE") %></a></div>
 					<div class="writer"><%=rs.getString("WRITER_ID") %></div>
 					<div class="date"><%=rs.getDate("REGDATE") %></div>
 					<div class="count"><%=rs.getInt("HIT") %></div>
