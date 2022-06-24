@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notice</title>
-<link rel="stylesheet" href="../css/customer/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/customer/layout.css">
 </head>
 <body>
 	<div class="board_wrap">

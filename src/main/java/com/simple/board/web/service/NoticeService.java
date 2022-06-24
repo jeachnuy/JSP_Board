@@ -206,4 +206,31 @@ public class NoticeService {
 		}
 		return notice;
 	}
+	
+	public int insertNotice(Notice notice) {
+		int result =0;
+		final String sql = "insert into NOTICE(title, writer_id, content) "
+				+ "values(?, ?, ?)";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, "devuser", "devpass");
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, notice.getTitle());
+			st.setString(2, notice.getWriter_id());
+			st.setString(3, notice.getContent());
+			result = st.executeUpdate();
+
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
