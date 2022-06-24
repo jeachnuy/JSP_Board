@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +17,16 @@
 		<div class="board_title">
 			<strong>お知らせ</strong>
 			<p>お知らせを迅速かつ正確にご案内いたします。</p>
+		</div>
+		<div class="board_search">
+			<form>
+				<select name="f">
+					<option ${(param.f=="title")?"selected":"" } value="title">題目</option>
+					<option ${(param.f=="writer_id")?"selected":"" } value="writer_id">作成者</option>
+				</select>
+				<input type="text" name="q" value="${param.q }"/>
+				<input class="btn-search" type="submit" value="検索" />
+			</form>
 		</div>
 		<div class="board_list_wrap">
 			<div class="board_list">
@@ -51,7 +61,7 @@
 					<a class="bt prev" onclick="alert('前のページがありません。')"><</a>
 				</c:if>
 				<c:forEach var="i" begin="0" end="4">
-				<a href="?p=${startNum+i }&t=&q=" class="num">${startNum+i }</a> 
+				<a href="?p=${startNum+i }&f=${param.f }&q=${param.q }" class="num">${startNum+i }</a> 
 				</c:forEach>
 				<c:if test="${startNum+5<LastNum }">
 					<a href="?p=${startNum+5 }&t=&q=" class="bt next">></a> 

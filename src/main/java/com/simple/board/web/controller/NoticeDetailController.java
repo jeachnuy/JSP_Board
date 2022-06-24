@@ -15,47 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.simple.board.web.entity.Notice;
+import com.simple.board.web.service.NoticeService;
 
 @WebServlet("/notice/detail")
 public class NoticeDetailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
-		String url = "jdbc:mysql://localhost:3306/devdb";
-		String sql = "select * from NOTICE where ID=?";
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection(url, "devuser", "devpass");
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, id);
-
-		ResultSet rs = st.executeQuery();
-
-		rs.next();
-
-		String title = rs.getString("title");
-		String writer_id = rs.getString("writer_id");
-		Date regdate = rs.getDate("regdate");
-		int hit = rs.getInt("hit");
-		String content = rs.getString("content");
 		
-		Notice notice =new Notice(id, title, writer_id, regdate, hit, content);
-		
+		NoticeService service = new NoticeService();
+		Notice notice =service.getNotice(id);
 		request.setAttribute("notice", notice);
 		
-		rs.close();
-		st.close();
-		con.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		request.getRequestDispatcher("/WEB-INF/view/notice/detail.jsp").forward(request, response);
 	}
 }
