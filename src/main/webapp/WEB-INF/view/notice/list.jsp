@@ -72,7 +72,7 @@
 				<a href="#" class="bt last">>></a>
 			</div>
 			<div class="bt_wrap">
-				<a href="write.html" class="on">登録</a>
+				<a href="reg" class="on">登録</a>
 			</div>
 		</div>
 	</div>

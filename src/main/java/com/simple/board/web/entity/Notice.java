@@ -12,7 +12,7 @@ public class Notice {
 	
 	public Notice() {}
 	
-	public Notice(int id, String title, String writer_id, Date regdate, int hit, String content) {
+	public Notice(final int id, final String title, final String writer_id, final Date regdate, final int hit, final String content) {
 		this.id = id;
 		this.title = title;
 		this.writer_id = writer_id;
@@ -25,7 +25,7 @@ public class Notice {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -33,7 +33,7 @@ public class Notice {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -41,7 +41,7 @@ public class Notice {
 		return writer_id;
 	}
 
-	public void setWriter_id(String writer_id) {
+	public void setWriter_id(final String writer_id) {
 		this.writer_id = writer_id;
 	}
 
@@ -49,7 +49,7 @@ public class Notice {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(final Date regdate) {
 		this.regdate = regdate;
 	}
 
@@ -57,7 +57,7 @@ public class Notice {
 		return hit;
 	}
 
-	public void setHit(int hit) {
+	public void setHit(final int hit) {
 		this.hit = hit;
 	}
 
@@ -65,7 +65,7 @@ public class Notice {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(final String content) {
 		this.content = content;
 	}
 

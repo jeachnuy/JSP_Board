@@ -21,10 +21,10 @@ import com.simple.board.web.service.NoticeService;
 public class NoticeDetailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		final int id = Integer.parseInt(request.getParameter("id"));
 		
-		NoticeService service = new NoticeService();
-		Notice notice =service.getNotice(id);
+		final NoticeService service = new NoticeService();
+		final Notice notice =service.getNotice(id);
 		request.setAttribute("notice", notice);
 		
 		request.getRequestDispatcher("/WEB-INF/view/notice/detail.jsp").forward(request, response);

@@ -16,19 +16,19 @@ public class NoticeService {
 		return getNoticeList("title", "", 1);
 	}
 
-	public List<Notice> getNoticeList(int page) {
+	public List<Notice> getNoticeList(final int page) {
 		return getNoticeList("title", "", page);
 	}
 
-	public List<Notice> getNoticeList(String field, String query, int page) {
+	public List<Notice> getNoticeList(final String field, final String query, final int page) {
 		List<Notice> list = new ArrayList<>();
 		
-		String sql = "select a.* from( " 
+		final String sql = "select a.* from( " 
 				+ "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
 				+ "where(@rownum:=0)=0 and " + field 
 				+ " like ? order by n.REGDATE desc) as a " 
 				+ "where rn BETWEEN ? and ?";
-		String url = "jdbc:mysql://localhost:3306/devdb";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -47,7 +47,7 @@ public class NoticeService {
 				int hit = rs.getInt("hit");
 				String content = rs.getString("content");
 
-				Notice notice = new Notice(id, title, writer_id, regdate, hit, content);
+				final Notice notice = new Notice(id, title, writer_id, regdate, hit, content);
 				list.add(notice);
 			}
 			rs.close();
@@ -67,14 +67,14 @@ public class NoticeService {
 		return getNoticeCount("title", "");
 	}
 
-	public int getNoticeCount(String field, String query) {
+	public int getNoticeCount(final String field, final String query) {
 		int count = 0;
 		
-		String sql = "select count(a.id) count from( " 
+		final String sql = "select count(a.id) count from( " 
 				+ "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
 				+ "where(@rownum:=0)=0 and " + field
 				+ " like ? order by n.REGDATE desc) as a";
-		String url = "jdbc:mysql://localhost:3306/devdb";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -82,6 +82,7 @@ public class NoticeService {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, "%" + query + "%");
 			ResultSet rs = st.executeQuery();
+			
 			count = rs.getInt("count");
 			
 			rs.close();
@@ -97,10 +98,10 @@ public class NoticeService {
 		return count;
 	}
 
-	public Notice getNotice(int id) {
+	public Notice getNotice(final int id) {
 		Notice notice =null;
-		String sql = "select * from NOTICE where id=?";
-		String url = "jdbc:mysql://localhost:3306/devdb";
+		final String sql = "select * from NOTICE where id=?";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -132,12 +133,12 @@ public class NoticeService {
 		return notice;
 	}
 
-	public Notice getNextNotice(int id) {
+	public Notice getNextNotice(final int id) {
 		Notice notice =null;
-		String sql = "select a.* from( " + "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
+		final String sql = "select a.* from( " + "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
 				+ "where(@rownum:=0)=0 and n.REGDATE > (select REGDATE from NOTICE where id=?) "
 				+ "order by n.REGDATE asc) a";
-		String url = "jdbc:mysql://localhost:3306/devdb";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -169,12 +170,12 @@ public class NoticeService {
 		return notice;
 	}
 
-	public Notice getPrevNotice(int id) {
+	public Notice getPrevNotice(final int id) {
 		Notice notice =null;
-		String sql = "select a.* from( " + "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
+		final String sql = "select a.* from( " + "select @rownum:=@rownum+1 rn, n.* from NOTICE n "
 				+ "where(@rownum:=0)=0 and n.REGDATE < (select REGDATE from NOTICE where id=?) "
 				+ "order by n.REGDATE desc) a";
-		String url = "jdbc:mysql://localhost:3306/devdb";
+		final String url = "jdbc:mysql://localhost:3306/devdb";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
